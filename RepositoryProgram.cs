@@ -1,6 +1,7 @@
 ﻿using DesignPatternsC.Objects;
 using DesignPatternsC.RepositoryPattern;
 using DesignPatternsC.Newtonsoft;
+using DesignPatternsC.DependencyInjectionPattern;
 
 IRepository<User> userRepository = new UserRepositoryMock();
 
@@ -21,6 +22,12 @@ PrintList(updatedUsers);
 
 Console.WriteLine("---");
 NewtonsoftImplementation.postUserAsync();
+
+// Manual Dependency Injection
+Console.WriteLine("---");
+IEmailService emailService = new EmailService();
+OrderService orderService = new OrderService(emailService);
+orderService.ProcessOrder("customer@example.com");
 
 
 // Generic method to print any list of objects
