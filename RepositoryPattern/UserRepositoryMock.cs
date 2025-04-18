@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DesignPatternsC;
+﻿using DesignPatternsC.Objects;
+using DesignPatternsC.RepositoryPattern;
 
 public class UserRepositoryMock : IRepository<User>
 {
@@ -11,10 +8,10 @@ public class UserRepositoryMock : IRepository<User>
 
     public UserRepositoryMock()
     {
-        _users = GenerateMockUsers(10);
+        _users = generateMockUsers(10);
     }
 
-    private List<User> GenerateMockUsers(int count)
+    private List<User> generateMockUsers(int count)
     {
         var users = new List<User>();
         for (int i = 0; i < count; i++)
@@ -29,18 +26,18 @@ public class UserRepositoryMock : IRepository<User>
         return users;
     }
 
-    public Task<IEnumerable<User>> GetAllAsync()
+    public Task<IEnumerable<User>> getAllAsync()
     {
         return Task.FromResult<IEnumerable<User>>(_users);
     }
 
-    public Task<User> GetByIdAsync(Guid id)
+    public Task<User> getByIdAsync(Guid id)
     {
         var user = _users.FirstOrDefault(u => u.Id == id);
         return Task.FromResult(user);
     }
 
-    public Task AddAsync(User user)
+    public Task addAsync(User user)
     {
         user.Id = Guid.NewGuid();
         _users.Add(user);
