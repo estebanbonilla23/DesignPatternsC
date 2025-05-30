@@ -29,6 +29,15 @@ IEmailService emailService = new EmailService();
 OrderService orderService = new OrderService(emailService);
 orderService.ProcessOrder("customer@example.com");
 
+// Buider pattern
+var car = new CarBuilderFluent()
+    .SetEngine("V6")
+    .SetWheels(4)
+    .SetGPS(true)
+    .Build();
+
+Console.WriteLine(car);
+
 
 // Generic method to print any list of objects
 static void PrintList<T>(IEnumerable<T> items)
